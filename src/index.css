@@ -1,7 +1,35 @@
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+html {
+  background-color: rgb(247, 247, 247);
+}
+
+body {
+  margin: 10;
+  font-family: system-ui;
+  color: rgb(28, 28, 28);
+
+}
+
+header {
+  background-color: inherit;
+  color: black;
+  padding: 1em;
+}
+
+header a {
+  background-color: grey;
+  color: rgb(24, 21, 181);
+  padding: 1em;
+  border-radius: 1em;
+}
+
+header a:hover {
+  background-color: grey;
+  border-radius: 1em
+}
+
+footer {
+  text-align: center;
+  padding: 2em;
 }
 
 #posts-index img {
@@ -10,4 +38,18 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+input[type=text] {
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  width: 300px;
+  border-radius: 1.0em;
+}
+
+button {
+  border-radius: 1em;
+  padding: 1em;
+  width: 3000 px;
 }
