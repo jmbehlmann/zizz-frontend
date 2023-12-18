@@ -8,9 +8,9 @@ export function PostsIndex(props) {
       {props.posts.map(post => (
         <div key={post.id}>
           <h2>Title: {post.title}</h2>
-          <img src={post.image_url} />
-          <p>Author: {post.author}</p>
-          <p>{post.text}</p>
+          <img src={post.image} />
+          <p>Author: {post.user_id}</p>
+          <p>{post.body}</p>
         </div>
       ))}
     </div>
