@@ -1,5 +1,5 @@
 html {
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(255, 255, 255);
 }
 
 body {
@@ -16,15 +16,16 @@ header {
 }
 
 header a {
-  background-color: grey;
+  background-color: inherit;
   color: rgb(24, 21, 181);
   padding: 1em;
   border-radius: 1em;
 }
 
 header a:hover {
-  background-color: grey;
-  border-radius: 1em
+  background-color: inherit;
+  border-radius: 1em;
+  font-weight: bold;
 }
 
 footer {
