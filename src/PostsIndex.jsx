@@ -11,6 +11,7 @@ export function PostsIndex(props) {
           <img src={post.image} />
           <p>Author: {post.user_id}</p>
           <p>{post.body}</p>
+          <button onClick={() => props.onShowPost(post)}>More nonsense</button>
         </div>
       ))}
     </div>

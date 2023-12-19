@@ -33,7 +33,7 @@ footer {
   padding: 2em;
 }
 
-#posts-index img {
+img {
   width: 300px;
 }
 
@@ -53,4 +53,8 @@ button {
   border-radius: 1em;
   padding: 1em;
   width: 3000 px;
+}
+
+.modal-main {
+  background-color: rgb(200, 218, 233);
 }
