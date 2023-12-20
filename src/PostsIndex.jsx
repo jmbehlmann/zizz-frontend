@@ -10,7 +10,7 @@ export function PostsIndex(props) {
           <h2>Title: {post.title}</h2>
           <img src={post.image} />
           <p>Author: {post.user_id}</p>
-          <p>{post.body}</p>
+          {/* <p>{post.body}</p> */}
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
         </div>
       ))}
