@@ -29,6 +29,29 @@ export function Content() {
     setIsPostsShowVisible(false)
   }
 
+  const handlePostCreate = (params) => {
+    console.log('handling post create')
+    axios.post("http://localhost:3000/posts.json", params).then(response => {
+      setPosts([...posts, response.data])
+    })
+  }
+
+  const handleUpdatePost = (id, params) => {
+    console.log('handling update recipe')
+    axios.patch("http://localhost:3000/posts/" + id + ".json", params).then(response => {
+      console.log(response.data)
+      setPosts(
+        posts.map(post => {
+          if (post.id === response.data.id) {
+            return response.data
+          } else {
+            return post
+          }
+        })
+      )
+      closeModal()
+    })
+  }
 
 useEffect(handleIndexPosts, []);
 
@@ -37,13 +60,12 @@ useEffect(handleIndexPosts, []);
   return (
     <div>
       <PostsIndex posts={posts} onShowPost={showModal}/>
-      <PostsNew />
-      {/* <button onClick={handleIndexPosts}>Get posts from the api </button> */}
-
+      <PostsNew onPostCreate={handlePostCreate}/>
       <Modal show={isPostsShowVisible} onClose={closeModal}>
-        <PostsShow post={selectedPost} />
+        <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} />
       </Modal>
 
+      {/* <button onClick={handleIndexPosts}>Get posts from the api </button> */}
     </div>
 
 

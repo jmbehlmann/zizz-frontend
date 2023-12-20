@@ -7,12 +7,13 @@ export function PostsIndex(props) {
       <h1>All posts</h1>
       {props.posts.map(post => (
         <div key={post.id}>
-          <h2>Title: {post.title}</h2>
+          <h2>{post.title}</h2>
           <img src={post.image} />
           <p>Author: {post.user_id}</p>
           {/* <p>{post.body}</p> */}
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
         </div>
+
       ))}
     </div>
   );
