@@ -12,6 +12,9 @@ export function PostsIndex(props) {
           <p>Author: {post.user_id}</p>
           {/* <p>{post.body}</p> */}
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
+        <br />
+        <br />
+        <br />
         </div>
 
       ))}

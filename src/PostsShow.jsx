@@ -8,6 +8,10 @@ export function PostsShow(props) {
     console.log('updating post')
   }
 
+  const destroyPost = () => {
+    console.log('destroying post')
+    props.onDestroyPost(props.post)
+  }
 
 
   return (
@@ -27,6 +31,9 @@ export function PostsShow(props) {
           <p>User ID: <input name="user_id" type="text" defaultValue={props.post.user_id} /></p>
           <button>Update this stuff</button>
         </form>
+        <br />
+        <br />
+        <button onClick={destroyPost}>Destroy!!!</button>
       </div>
 
 
