@@ -4,6 +4,10 @@ import { PostsShow } from "./PostsShow"
 import axios from "axios";
 import { useState, useEffect } from 'react'
 import { Modal } from "./Modal";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
+import { LogoutLink } from "./LogoutLink";
+
 
 export function Content() {
   const [posts, setPosts] = useState([]);
@@ -69,11 +73,14 @@ useEffect(handleIndexPosts, []);
 
   return (
     <div>
+      <Signup />
+      <Login />
       <PostsIndex posts={posts} onShowPost={showModal}/>
       <PostsNew onPostCreate={handlePostCreate}/>
       <Modal show={isPostsShowVisible} onClose={closeModal}>
         <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
       </Modal>
+      <LogoutLink />
 
       {/* <button onClick={handleIndexPosts}>Get posts from the api </button> */}
     </div>

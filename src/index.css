@@ -41,9 +41,11 @@ html {
   scroll-behavior: smooth;
 }
 
-input[type=text] {
-  padding: 10px;
-  margin: 10px 0;
+input,
+label {
+  display: block;
+  padding: 8px;
+  margin: 4px 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   width: 300px;
   border-radius: 1.0em;
