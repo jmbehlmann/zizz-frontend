@@ -13,6 +13,8 @@ header {
   background-color: inherit;
   color: black;
   padding: 1em;
+  font-family: system-ui;
+
 }
 
 header a {
@@ -45,7 +47,7 @@ input,
 label {
   display: block;
   padding: 8px;
-  margin: 4px 0;
+  margin: 10px 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   width: 300px;
   border-radius: 1.0em;
@@ -59,4 +61,11 @@ button {
 
 .modal-main {
   background-color: rgb(200, 218, 233);
+  overflow: hidden;
+}
+
+
+
+.modal-body {
+  overflow-y: scroll;
 }

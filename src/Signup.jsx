@@ -31,16 +31,16 @@ export function Signup() {
       </ul>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input name="name" type="text" />
+          <input name="name" type="text" placeholder="Name"/>
         </div>
         <div>
-          Email: <input name="email" type="email" />
+          <input name="email" type="email" placeholder="Email"/>
         </div>
         <div>
-          Password: <input name="password" type="password" />
+          <input name="password" type="password" placeholder="Password"/>
         </div>
         <div>
-          Password confirmation: <input name="password_confirmation" type="password" />
+          <input name="password_confirmation" type="password" placeholder="Password confirmation"/>
         </div>
         <button type="submit">Signup</button>
       </form>
