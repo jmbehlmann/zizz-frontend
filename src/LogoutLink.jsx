@@ -9,8 +9,21 @@ export function LogoutLink() {
   };
 
   return (
-    <a href="#" onClick={handleClick}>
-      Logout
-    </a>
+    <div>
+      <p>
+        <a href="#" onClick={handleClick}>
+          Logout
+        </a>
+      </p>
+    </div>
+
+    // <div>
+    //   <form onSubmit={handleSubmit}>
+
+    //     </div>
+    //     <button onClick={handleClick} type="submit">Log Out</button>
+    //   </form>
+    // </div>
+
   );
 }

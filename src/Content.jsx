@@ -36,12 +36,6 @@ export function Content() {
     setIsPostsShowVisible(false)
   }
 
-  const handlePostCreate = (params) => {
-    console.log('handling post create')
-    axios.post("http://localhost:3000/posts.json", params).then(response => {
-      setPosts([...posts, response.data])
-    })
-  }
 
   const handleUpdatePost = (id, params) => {
     console.log('handling update recipe')
@@ -78,15 +72,21 @@ useEffect(handleIndexPosts, []);
     <div>
       <Routes>
         <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<LogoutLink />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<PostsIndex posts={posts} onShowPost={showModal}/>} />
+        <Route path="/posts/new" element={<PostsNew />} />
+
       </Routes>
-      <Signup />
-      <Login />
-      <PostsIndex posts={posts} onShowPost={showModal}/>
-      <PostsNew onPostCreate={handlePostCreate}/>
+      {/* <Signup /> */}
+      {/* <Login /> */}
+      {/* <PostsIndex posts={posts} onShowPost={showModal}/> */}
+      {/* <PostsNew onPostCreate={handlePostCreate}/> */}
       <Modal show={isPostsShowVisible} onClose={closeModal}>
         <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
       </Modal>
-      <LogoutLink />
+      {/* <LogoutLink /> */}
 
       {/* <button onClick={handleIndexPosts}>Get posts from the api </button> */}
     </div>
