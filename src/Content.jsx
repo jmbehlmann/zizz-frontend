@@ -1,12 +1,15 @@
 import { PostsNew } from "./PostsNew";
 import { PostsIndex } from "./PostsIndex";
 import { PostsShow } from "./PostsShow"
-import axios from "axios";
-import { useState, useEffect } from 'react'
 import { Modal } from "./Modal";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
+import { About } from "./About";
+import axios from "axios";
+import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+
 
 
 export function Content() {
@@ -73,6 +76,9 @@ useEffect(handleIndexPosts, []);
 
   return (
     <div>
+      <Routes>
+        <Route path="/about" element={<About />} />
+      </Routes>
       <Signup />
       <Login />
       <PostsIndex posts={posts} onShowPost={showModal}/>
