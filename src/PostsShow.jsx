@@ -1,6 +1,21 @@
-import axios from 'axios'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 
 export function PostsShow(props) {
+
+  // const [userName, setUserName] = useState('');
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3000/users/${props.post.user_id}`)
+  //     .then(response => {
+  //       setUserName(response.data.name);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching user data:', error);
+  //     });
+  // }, [props.post.user_id]);
+
   const updatePost = (event) => {
     event.preventDefault()
     const params = new FormData(event.target)
@@ -17,21 +32,18 @@ export function PostsShow(props) {
   return (
     <div>
       <p>id: {props.post.id}</p>
-      <p>Check it out!</p>
-      <p>{props.post.title}</p>
-      <p>{props.post.body}</p>
-      <img src={props.post.image} />
+      <p>Buzz!</p>
+      <p>{props.post.text}</p>
       <p>{props.post.user_id}</p>
+      <p>{props.post.created_at}</p>
+      {/* maybe add user name here eventually */}
+      {/* <p>{userName}</p> */}
 
       <div>
         <form onSubmit={updatePost}>
-          <p>Title: <input name="title" type="text" defaultValue={props.post.title} /></p>
-          <p>Body: <input name="body" type="text" defaultValue={props.post.body} /></p>
-          <p>Photo Url: <input name="image" type="text" defaultValue={props.post.image} /></p>
-          <p>User ID: <input name="user_id" type="text" defaultValue={props.post.user_id} /></p>
+          <p>Update Buzz: <input name="text" type="text" defaultValue={props.post.text} /></p>
           <button>Update this stuff</button>
         </form>
-        <br />
         <br />
         <button onClick={destroyPost}>Destroy!!!</button>
       </div>
