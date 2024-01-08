@@ -14,7 +14,10 @@ export function UserProfile({ users }) {
       <h2>User Profile</h2>
       <p>User ID: {user.id}</p>
       <p>Name: {user.name}</p>
-      {/* Display other user details as needed */}
+      <button>Follow</button>
+      <button>Unfollow</button>
+      <p>show followers and following</p>
+      <p>show all users posts</p>
     </div>
   );
 }
