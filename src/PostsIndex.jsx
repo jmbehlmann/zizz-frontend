@@ -30,8 +30,10 @@ export function PostsIndex(props) {
       <h1>All posts</h1>
       {props.posts.map(post => (
         <div key={post.id}>
-          <h4>{usersMap[post.user_id]} - {post.formatted_created_at}</h4>
+          <h4>{usersMap[post.user_id]} - </h4>
+          <a href={`./users/${post.user_id}`}>profile</a>
           <p>{post.text}</p>
+          <h6>{post.formatted_created_at}</h6>
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
         </div>
       ))}

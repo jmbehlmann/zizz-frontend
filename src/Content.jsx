@@ -5,6 +5,7 @@ import { Modal } from "./Modal";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
+import { UserProfile } from './UserProfile';
 import { About } from "./About";
 import axios from "axios";
 import { useState, useEffect } from 'react'
@@ -16,6 +17,7 @@ export function Content() {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState({});
   const [isPostsShowVisible, setIsPostsShowVisible] = useState(false);
+  const [users, setUsers] = useState([]);
 
   const handleIndexPosts = () => {
     console.log("in handle index posts");
@@ -65,7 +67,11 @@ export function Content() {
 
 
 useEffect(handleIndexPosts, []);
-
+useEffect(() => {
+    axios.get('http://localhost:3000/users.json').then(response => {
+      setUsers(response.data);
+    });
+  }, []);
 
 
   return (
@@ -77,7 +83,7 @@ useEffect(handleIndexPosts, []);
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<PostsIndex posts={posts} onShowPost={showModal}/>} />
         <Route path="/posts/new" element={<PostsNew />} />
-
+        <Route path="/users/:userId" element={<UserProfile users={users} />} />
       </Routes>
       {/* <Signup /> */}
       {/* <Login /> */}

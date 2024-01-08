@@ -1,7 +1,7 @@
 export function About() {
   return (
     <div>
-      <p>About page</p>
+      <p>fake twitter</p>
     </div>
   )
 }
