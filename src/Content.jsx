@@ -12,7 +12,6 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 
-
 export function Content() {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState({});
@@ -27,17 +26,15 @@ export function Content() {
     })
   }
 
-  const showModal = (post) => {
-    console.log(post)
-    setSelectedPost(post)
-    setIsPostsShowVisible(true)
+  const handlePostCreate = (params) => {
+    console.log('handling post create')
+    axios
+      .post("http://localhost:3000/posts.json", params)
+      .then((response) => {
+        const newPost = response.data
+        setPosts([newPost, ...posts])
+    })
   }
-
-  const closeModal = () => {
-    console.log('close');
-    setIsPostsShowVisible(false)
-  }
-
 
   const handleUpdatePost = (id, params) => {
     console.log('handling update recipe')
@@ -65,13 +62,26 @@ export function Content() {
     })
   }
 
+  const showModal = (post) => {
+    console.log(post)
+    setSelectedPost(post)
+    setIsPostsShowVisible(true)
+  }
+
+  const closeModal = () => {
+    console.log('close');
+    setIsPostsShowVisible(false)
+  }
+
 
 useEffect(handleIndexPosts, []);
+
 useEffect(() => {
     axios.get('http://localhost:3000/users.json').then(response => {
       setUsers(response.data);
     });
   }, []);
+
 
 
   return (
@@ -81,7 +91,13 @@ useEffect(() => {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<LogoutLink />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<PostsIndex posts={posts} onShowPost={showModal}/>} />
+        {/* <Route path="/" element={<PostsIndex posts={posts} onShowPost={showModal}/>} /> */}
+        <Route path="/" element={
+          <>
+            <PostsNew onPostCreate={handlePostCreate} />
+            <PostsIndex posts={posts} onShowPost={showModal} />
+          </>
+        } />
         <Route path="/posts/new" element={<PostsNew />} />
         <Route path="/users/:userId" element={<UserProfile users={users} />} />
       </Routes>

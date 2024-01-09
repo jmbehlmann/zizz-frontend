@@ -1,11 +1,26 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+function formatCreatedAt(created_at) {
+  const date = new Date(created_at);
+  const options = {
+    weekday: 'short',
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+    timeZone: 'America/Chicago' // Set the appropriate timezone here
+  };
+  return date.toLocaleString('en-US', options);
+}
+
 export function PostsIndex(props) {
   const [usersMap, setUsersMap] = useState({});
 
+
   useEffect(() => {
-    // Fetch user data for all unique user IDs
     const uniqueUserIds = [...new Set(props.posts.map(post => post.user_id))];
 
     const fetchUserNames = async () => {
@@ -33,7 +48,7 @@ export function PostsIndex(props) {
           <h4>{usersMap[post.user_id]} - </h4>
           <a href={`./users/${post.user_id}`}>profile</a>
           <p>{post.text}</p>
-          <h6>{post.formatted_created_at}</h6>
+          <h6>{formatCreatedAt(post.created_at)}</h6>
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
         </div>
       ))}
