@@ -9,7 +9,7 @@ import { UserProfile } from './UserProfile';
 import { About } from "./About";
 import axios from "axios";
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 
 
 export function Content() {
@@ -17,6 +17,8 @@ export function Content() {
   const [selectedPost, setSelectedPost] = useState({});
   const [isPostsShowVisible, setIsPostsShowVisible] = useState(false);
   const [users, setUsers] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleIndexPosts = () => {
     console.log("in handle index posts");
@@ -33,6 +35,9 @@ export function Content() {
       .then((response) => {
         const newPost = response.data
         setPosts([newPost, ...posts])
+        if (location.pathname === "/posts/new") {
+          navigate('/');
+        }
     })
   }
 
