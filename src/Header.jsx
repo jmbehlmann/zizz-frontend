@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export function Header() {
   return (
     <header>
-      <a href="/">Home</a> | <a href="/posts/new">New post</a> | <Link to="/about">About</Link> | <Link to="/login">Login</Link> | <Link to="/signup">Sign Up</Link> | <Link to="/logout">Log Out</Link>
+      <Link to="/">Home</Link> | <Link to="/posts/new">New post</Link> | <Link to="/about">About</Link> | <Link to="/login">Login</Link> | <Link to="/signup">Sign Up</Link> | <Link to="/logout">Log Out</Link>
 
       {/* <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
