@@ -91,26 +91,25 @@ useEffect(() => {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<LogoutLink />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Route path="/" element={<PostsIndex posts={posts} onShowPost={showModal}/>} /> */}
         <Route path="/" element={
           <>
             <PostsNew onPostCreate={handlePostCreate} />
             <PostsIndex posts={posts} onShowPost={showModal} />
           </>
         } />
-        <Route path="/posts/new" element={<PostsNew />} />
+        <Route path="/posts/new" element={<PostsNew onPostCreate={handlePostCreate} />} />
         <Route path="/users/:userId" element={<UserProfile users={users} />} />
       </Routes>
+      <Modal show={isPostsShowVisible} onClose={closeModal}>
+        <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
+      </Modal>
+
       {/* <Signup /> */}
       {/* <Login /> */}
       {/* <PostsIndex posts={posts} onShowPost={showModal}/> */}
       {/* <PostsNew onPostCreate={handlePostCreate}/> */}
-      <Modal show={isPostsShowVisible} onClose={closeModal}>
-        <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
-      </Modal>
       {/* <LogoutLink /> */}
 
-      {/* <button onClick={handleIndexPosts}>Get posts from the api </button> */}
     </div>
 
 
