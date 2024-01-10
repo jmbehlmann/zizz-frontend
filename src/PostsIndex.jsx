@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 function formatCreatedAt(created_at) {
   const date = new Date(created_at);
@@ -46,7 +47,7 @@ export function PostsIndex(props) {
       {props.posts.map(post => (
         <div key={post.id}>
           <h4>{usersMap[post.user_id]} - </h4>
-          <a href={`./users/${post.user_id}`}>profile</a>
+          <Link to={`./users/${post.user_id}`}>profile</Link>
           <p>{post.text}</p>
           <h6>{formatCreatedAt(post.created_at)}</h6>
           <button onClick={() => props.onShowPost(post)}>More nonsense</button>
