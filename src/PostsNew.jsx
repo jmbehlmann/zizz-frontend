@@ -4,10 +4,12 @@ export function PostsNew(props) {
   const createPost = (event) => {
     event.preventDefault()
     const params = new FormData(event.target)
+    console.log(params)
     props.onPostCreate(params)
     console.log('creating post')
     event.target.reset()
   }
+
 
   return (
     <div id="posts-new">
