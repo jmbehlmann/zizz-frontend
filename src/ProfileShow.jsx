@@ -2,11 +2,18 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import axios from "axios"
 
+function useForceUpdate() {
+  const [, forceUpdate] = useState();
+  return () => forceUpdate(prevState => !prevState);
+}
+
 export function ProfileShow({ users }) {
 
   const [relationshipId, setRelationshipId] = useState([]);
   const { userId } = useParams();
   const profile = users.find(user => user.id === parseInt(userId));
+
+    const forceUpdate = useForceUpdate();
 
 
   const getRelationshipId = () => {
@@ -30,6 +37,7 @@ export function ProfileShow({ users }) {
       .then((response) => {
         console.log(response.data)
       })
+    forceUpdate();
   }
 
 // should have a modal pop up that says you unfollowed user, click ok button, then redirect to home
@@ -38,6 +46,7 @@ export function ProfileShow({ users }) {
     console.log("destroy relationship");
     axios.delete(`http://localhost:3000/relationships/${relationshipId}.json`)
     console.log("relationship destroyed")
+    forceUpdate();
   }
 
   if (!profile) {
@@ -50,7 +59,6 @@ export function ProfileShow({ users }) {
 
   console.log(relationshipId)
 
-  // useEffect(getRelationshipId, [])
 
   return (
     <div>
