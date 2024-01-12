@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-export function UserProfile({ users }) {
+export function ProfileShow({ users }) {
   const { userId } = useParams();
 
   const user = users.find(user => user.id === parseInt(userId));

@@ -12,7 +12,7 @@ function formatCreatedAt(created_at) {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
-    timeZone: 'America/Chicago' // Set the appropriate timezone here
+    timeZone: 'America/Chicago'
   };
   return date.toLocaleString('en-US', options);
 }

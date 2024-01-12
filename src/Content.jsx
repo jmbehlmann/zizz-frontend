@@ -5,7 +5,7 @@ import { Modal } from "./Modal";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
-import { UserProfile } from './UserProfile';
+import { ProfileShow } from './ProfileShow';
 import { About } from "./About";
 import axios from "axios";
 import { useState, useEffect } from 'react'
@@ -103,7 +103,7 @@ useEffect(() => {
           </>
         } />
         <Route path="/posts/new" element={<PostsNew onPostCreate={handlePostCreate} />} />
-        <Route path="/users/:userId" element={<UserProfile users={users} />} />
+        <Route path="/users/:userId" element={<ProfileShow users={users} />} />
       </Routes>
       <Modal show={isPostsShowVisible} onClose={closeModal}>
         <PostsShow post={selectedPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost} />
