@@ -2,11 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from "axios"
 
-function useForceUpdate() {
-  const [, forceUpdate] = useState();
-  return () => forceUpdate(prevState => !prevState);
-}
-
 function formatCreatedAt(created_at) {
   const date = new Date(created_at);
   const options = {
@@ -24,14 +19,11 @@ function formatCreatedAt(created_at) {
 
 export function ProfileShow({ users }) {
   const { userId } = useParams();
-
-  const [relationshipId, setRelationshipId] = useState([]);
-  const [isFollowing, setIsFollowing] = useState([]);
-  const [userPosts, setUserPosts] = useState([]);
-
-  const forceUpdate = useForceUpdate();
-
   const profile = users.find(user => user.id === parseInt(userId));
+  const [relationshipId, setRelationshipId] = useState({});
+  const [userPosts, setUserPosts] = useState([]);
+  const isFollowing = typeof relationshipId === 'number';
+
 
   const getRelationshipId = () => {
     console.log("getting relationship ID")
@@ -44,11 +36,7 @@ export function ProfileShow({ users }) {
       console.log(response.data)
       if (response.data.length !== 0) {
         setRelationshipId(response.data[0].id)
-        setIsFollowing(true)
-        console.log(isFollowing)
-      } else {
-        setIsFollowing(false)
-        console.log(isFollowing)
+        // console.log(relationshipId)
       }
     })
   }
@@ -59,9 +47,7 @@ export function ProfileShow({ users }) {
       leader_id: profile.id,
     })
     .then((response) => {
-      console.log(response.data)
-      setIsFollowing(true)
-      forceUpdate();
+      console.log("youre following")
     })
   }
 
@@ -71,11 +57,22 @@ export function ProfileShow({ users }) {
     console.log("destroy relationship");
     axios.delete(`http://localhost:3000/relationships/${relationshipId}.json`)
     .then(() => {
-      console.log("relationship destroyed")
-      setIsFollowing(false);
-      forceUpdate();
+      console.log("you unfollowed them")
     })
   }
+
+
+  useEffect(() => {
+    if (profile) {
+      getRelationshipId();
+      if (isFollowing) {
+        profilePostsIndex();
+      }
+    }
+  }, [profile, isFollowing]);
+
+  console.log(relationshipId)
+  console.log(isFollowing)
 
   const profilePostsIndex = () => {
     console.log("profilePostsIndex")
@@ -90,16 +87,6 @@ export function ProfileShow({ users }) {
     })
   }
 
-
-  useEffect(() => {
-    if (profile) {
-      getRelationshipId();
-      profilePostsIndex();
-    }
-  }, [profile]);
-
-
-
   return (
     <div>
       <h2>User Profile</h2>
@@ -111,16 +98,18 @@ export function ProfileShow({ users }) {
           <button onClick={destroyRelationship}>Unfollow</button>
           <p>show followers and following</p>
           <p>show all users posts</p>
-          <div id="user-posts-index">
-            <h2>{profile.name}'s Posts</h2>
-            {userPosts.map(userPost => (
-              <div key={userPost.id}>
-                <p>{formatCreatedAt(userPost.created_at)}</p>
-                <p>{userPost.text}</p>
-                <p>--------</p>
-              </div>
-            ))}
-          </div>
+          {isFollowing && (
+            <div id="user-posts-index">
+              <h2>{profile.name}'s Posts</h2>
+              {userPosts.map(userPost => (
+                <div key={userPost.id}>
+                  <p>{userPost.id}</p>
+                  <p>{userPost.text}</p>
+                  <p>-----------</p>
+                </div>
+              ))}
+            </div>
+          )}
         </>
       ) : (
         <div>User not Found</div>
