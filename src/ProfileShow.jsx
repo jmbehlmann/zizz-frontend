@@ -17,6 +17,7 @@ function formatCreatedAt(created_at) {
   return date.toLocaleString('en-US', options);
 }
 
+
 export function ProfileShow({ users }) {
   const { userId } = useParams();
   const profile = users.find(user => user.id === parseInt(userId));
@@ -48,6 +49,7 @@ export function ProfileShow({ users }) {
     })
     .then((response) => {
       console.log("youre following")
+      window.location.reload();
     })
   }
 
@@ -58,21 +60,9 @@ export function ProfileShow({ users }) {
     axios.delete(`http://localhost:3000/relationships/${relationshipId}.json`)
     .then(() => {
       console.log("you unfollowed them")
+      window.location.reload();
     })
   }
-
-
-  useEffect(() => {
-    if (profile) {
-      getRelationshipId();
-      if (isFollowing) {
-        profilePostsIndex();
-      }
-    }
-  }, [profile, isFollowing]);
-
-  console.log(relationshipId)
-  console.log(isFollowing)
 
   const profilePostsIndex = () => {
     console.log("profilePostsIndex")
@@ -86,6 +76,20 @@ export function ProfileShow({ users }) {
       setUserPosts(response.data)
     })
   }
+
+  useEffect(() => {
+    if (profile) {
+      getRelationshipId();
+      if (isFollowing) {
+        profilePostsIndex();
+      }
+    }
+  }, [profile, isFollowing]);
+
+  console.log(relationshipId)
+  console.log(isFollowing)
+
+
 
   return (
     <div>
